@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import CasClient, { constant } from "react-cas-client";
 
 
 const Home = () => {
 
-    let casEndpoint = "https://ssodev.ucdavis.edu/cas";
+    let casEndpoint = "ssodev.ucdavis.edu";
     let casOptions = { version: constant.CAS_VERSION_2_0 };
 
     let casClient = new CasClient(casEndpoint, casOptions);
+
+    const [user, setUser] = useState("")
 
     function handleLogin(event){
         event.preventDefault()
@@ -16,6 +18,7 @@ const Home = () => {
             .auth()
             .then(successRes => {
                 console.log(successRes);
+                setUser(successRes.user)
                 // Login user in state / locationStorage ()
                 // eg. loginUser(response.user);
 
@@ -37,6 +40,7 @@ const Home = () => {
     return (
         <div>
             <h1>Login</h1>
+            <p>{user}</p>
             <button onClick={handleLogin}>Login Here</button>
         </div>
     )
