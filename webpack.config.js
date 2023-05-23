@@ -25,5 +25,9 @@ module.exports = {
   },
   devServer: {
     static: path.resolve(__dirname, './public'),
+    host: "localhost.specialurl.com",
+    port: 3000,
+    https: false
+    // host: "appapp.io"
   },
 };
